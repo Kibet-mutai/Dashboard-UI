@@ -2,13 +2,16 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
+import { useRouter, usePathname } from "next/navigation";
 import { BiChevronDown, BiDollar, BiPulse } from "react-icons/bi";
 import { FiUsers } from "react-icons/fi";
 import { CgBox } from "react-icons/cg";
 import Graph from "./Graph";
-
+import { Calender } from "./Calender";
 export default function Dashboard() {
   const [dropDown, setDropDown] = useState(false);
+  const router = useRouter();
+  const pathname = usePathname();
   return (
     <main className="px-4 py-8 mt-6 w-full">
       <div className="border border-gray-700 flex flex-col gap-y-4 rounded-md">
@@ -35,10 +38,24 @@ export default function Dashboard() {
               </div>
             </button>
             <div className="flex space-x-6">
-              <Link href={"#"}>Overview</Link>
-              <Link href={"#"}>Customers</Link>
-              <Link href={"#"}>Products</Link>
-              <Link href={"#"}>Settings</Link>
+              <Link
+                href={"#"}
+                className={`${pathname === "/" ? "text-white" : ""}`}
+              >
+                Overview
+              </Link>
+              <Link
+                href={"/customers"}
+                className={`${pathname === "/customers" ? "text-white" : ""}`}
+              >
+                Customers
+              </Link>
+              <Link href={"#"} className="text-gray-700">
+                Products
+              </Link>
+              <Link href={"#"} className="text-gray-700">
+                Settings
+              </Link>
             </div>
           </div>
           <div className="flex items-center space-x-3">
@@ -66,13 +83,25 @@ export default function Dashboard() {
                 id="date"
                 className="border-gray-700 border outline-none bg-inherit w-80 rounded-md p-1 cursor-pointer"
               />
+              {/* <div className="text-white">
+                <Calender />
+              </div> */}
               <button className="items-center bg-white px-2.5 text-black rounded-md text-sm">
                 Download
               </button>
             </div>
           </div>
-          <div className="bg-gray-500/25 rounded-md flex items-center py-1 px-2 w-96 space-x-6">
-            <Link href={"#"}>Overview</Link>
+          <div className="bg-gray-500/25 rounded-md flex items-center py-1 px-2 w-[400px] space-x-6">
+            <Link
+              href={"#"}
+              className={`${
+                pathname === "/"
+                  ? "bg-black rounded-md px-2 items-center py-1"
+                  : ""
+              }`}
+            >
+              Overview
+            </Link>
             <Link href={"#"}>Analytics</Link>
             <Link href={"#"}>Reports</Link>
             <Link href={"#"}>Notifications</Link>
